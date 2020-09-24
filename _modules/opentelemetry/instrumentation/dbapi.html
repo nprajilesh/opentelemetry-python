@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.instrumentation.dbapi &mdash; OpenTelemetry Python  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> OpenTelemetry Python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started.html">Getting Started with OpenTelemetry Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq-and-cookbook.html">Frequently Asked Questions and Cookbook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/api.html">OpenTelemetry Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sdk/sdk.html">OpenTelemetry Python SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Exporters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/datadog/datadog.html">OpenTelemetry Datadog Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/jaeger/jaeger.html">Opentelemetry Jaeger Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/opencensus/opencensus.html">OpenCensus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/otlp/otlp.html">Opentelemetry OTLP Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/prometheus/prometheus.html">OpenTelemetry Prometheus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/zipkin/zipkin.html">Opentelemetry Zipkin Exporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Instrumentations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/aiohttp_client/aiohttp_client.html">OpenTelemetry aiohttp client Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/aiopg/aiopg.html">OpenTelemetry aiopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/asgi/asgi.html">OpenTelemetry ASGI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/asyncpg/asyncpg.html">Opentelemetry asyncpg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/boto/boto.html">OpenTelemetry Boto Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/botocore/botocore.html">OpenTelemetry Botocore Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/celery/celery.html">OpenTelemetry Celery Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/dbapi/dbapi.html">OpenTelemetry Database API Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/django/django.html">OpenTelemetry Django Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/fastapi/fastapi.html">OpenTelemetry FastAPI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/flask/flask.html">OpenTelemetry Flask Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/grpc/grpc.html">OpenTelemetry gRPC Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentor.html">opentelemetry.instrumentation.instrumentor package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/jinja2/jinja2.html">OpenTelemetry Jinja2 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/mysql/mysql.html">OpenTelemetry MySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/opentracing_shim/opentracing_shim.html">OpenTracing Shim for OpenTelemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/psycopg2/psycopg2.html">OpenTelemetry Psycopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymemcache/pymemcache.html">OpenTelemetry pymemcache Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymongo/pymongo.html">OpenTelemetry pymongo Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymysql/pymysql.html">OpenTelemetry PyMySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pyramid/pyramid.html">OpenTelemetry Pyramid Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/redis/redis.html">OpenTelemetry Redis Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/requests/requests.html">OpenTelemetry requests Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/sqlalchemy/sqlalchemy.html">OpenTelemetry SQLAlchemy Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/sqlite3/sqlite3.html">OpenTelemetry SQLite3 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/starlette/starlette.html">OpenTelemetry Starlette Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/system_metrics/system_metrics.html">OpenTelemetry System Metrics Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/wsgi/wsgi.html">OpenTelemetry WSGI Instrumentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/auto-instrumentation/README.html">Autoinstrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/basic_meter/README.html">Basic Meter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/basic_tracer/README.html">Basic Trace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/datadog_exporter/README.html">Datadog Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/django/README.html">OpenTelemetry Django Instrumentation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opencensus-exporter-metrics/README.html">OpenTelemetry Collector Metrics OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opencensus-exporter-tracer/README.html">OpenTelemetry Collector Tracer OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opentelemetry-example-app/README.html">OpenTelemetry Example Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opentracing/README.html">OpenTracing Shim Example</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OpenTelemetry Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>opentelemetry.instrumentation.dbapi</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for opentelemetry.instrumentation.dbapi</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright The OpenTelemetry Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The trace integration with Database API supports libraries that follow the</span>
+<span class="sd">Python Database API Specification v2.0.</span>
+<span class="sd">`&lt;https://www.python.org/dev/peps/pep-0249/&gt;`_</span>
+
+<span class="sd">Usage</span>
+<span class="sd">-----</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    import mysql.connector</span>
+<span class="sd">    import pyodbc</span>
+
+<span class="sd">    from opentelemetry import trace</span>
+<span class="sd">    from opentelemetry.instrumentation.dbapi import trace_integration</span>
+<span class="sd">    from opentelemetry.trace import TracerProvider</span>
+
+<span class="sd">    trace.set_tracer_provider(TracerProvider())</span>
+
+<span class="sd">    # Ex: mysql.connector</span>
+<span class="sd">    trace_integration(mysql.connector, &quot;connect&quot;, &quot;mysql&quot;, &quot;sql&quot;)</span>
+<span class="sd">    # Ex: pyodbc</span>
+<span class="sd">    trace_integration(pyodbc, &quot;Connection&quot;, &quot;odbc&quot;, &quot;sql&quot;)</span>
+
+<span class="sd">API</span>
+<span class="sd">---</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">wrapt</span>
+
+<span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span> <span class="k">as</span> <span class="n">trace_api</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.dbapi.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.utils</span> <span class="kn">import</span> <span class="n">unwrap</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.trace</span> <span class="kn">import</span> <span class="n">SpanKind</span><span class="p">,</span> <span class="n">TracerProvider</span><span class="p">,</span> <span class="n">get_tracer</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.trace.status</span> <span class="kn">import</span> <span class="n">Status</span><span class="p">,</span> <span class="n">StatusCanonicalCode</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="trace_integration"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.trace_integration">[docs]</a><span class="k">def</span> <span class="nf">trace_integration</span><span class="p">(</span>
+    <span class="n">connect_module</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">connect_method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">database_component</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">database_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">connection_attributes</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tracer_provider</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TracerProvider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Integrate with DB API library.</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-0249/</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            connect_module: Module name where connect method is available.</span>
+<span class="sd">            connect_method_name: The connect method name.</span>
+<span class="sd">            database_component: Database driver name or database name &quot;JDBI&quot;,</span>
+<span class="sd">                &quot;jdbc&quot;, &quot;odbc&quot;, &quot;postgreSQL&quot;.</span>
+<span class="sd">            database_type: The Database type. For any SQL database, &quot;sql&quot;.</span>
+<span class="sd">            connection_attributes: Attribute names for database, port, host and</span>
+<span class="sd">                user in Connection object.</span>
+<span class="sd">            tracer_provider: The :class:`opentelemetry.trace.TracerProvider` to</span>
+<span class="sd">                use. If ommited the current configured one is used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrap_connect</span><span class="p">(</span>
+        <span class="vm">__name__</span><span class="p">,</span>
+        <span class="n">connect_module</span><span class="p">,</span>
+        <span class="n">connect_method_name</span><span class="p">,</span>
+        <span class="n">database_component</span><span class="p">,</span>
+        <span class="n">database_type</span><span class="p">,</span>
+        <span class="n">connection_attributes</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+        <span class="n">tracer_provider</span><span class="o">=</span><span class="n">tracer_provider</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="wrap_connect"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.wrap_connect">[docs]</a><span class="k">def</span> <span class="nf">wrap_connect</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">connect_module</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">connect_method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">database_component</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">database_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">connection_attributes</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">tracer_provider</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TracerProvider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Integrate with DB API library.</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-0249/</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tracer: The :class:`opentelemetry.trace.Tracer` to use.</span>
+<span class="sd">            connect_module: Module name where connect method is available.</span>
+<span class="sd">            connect_method_name: The connect method name.</span>
+<span class="sd">            database_component: Database driver name or database name &quot;JDBI&quot;,</span>
+<span class="sd">                &quot;jdbc&quot;, &quot;odbc&quot;, &quot;postgreSQL&quot;.</span>
+<span class="sd">            database_type: The Database type. For any SQL database, &quot;sql&quot;.</span>
+<span class="sd">            connection_attributes: Attribute names for database, port, host and</span>
+<span class="sd">                user in Connection object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># pylint: disable=unused-argument</span>
+    <span class="k">def</span> <span class="nf">wrap_connect_</span><span class="p">(</span>
+        <span class="n">wrapped</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">instance</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">kwargs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="n">db_integration</span> <span class="o">=</span> <span class="n">DatabaseApiIntegration</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="n">database_component</span><span class="p">,</span>
+            <span class="n">database_type</span><span class="o">=</span><span class="n">database_type</span><span class="p">,</span>
+            <span class="n">connection_attributes</span><span class="o">=</span><span class="n">connection_attributes</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">tracer_provider</span><span class="o">=</span><span class="n">tracer_provider</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">db_integration</span><span class="o">.</span><span class="n">wrapped_connection</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">wrapt</span><span class="o">.</span><span class="n">wrap_function_wrapper</span><span class="p">(</span>
+            <span class="n">connect_module</span><span class="p">,</span> <span class="n">connect_method_name</span><span class="p">,</span> <span class="n">wrap_connect_</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to integrate with DB API. </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="unwrap_connect"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.unwrap_connect">[docs]</a><span class="k">def</span> <span class="nf">unwrap_connect</span><span class="p">(</span>
+    <span class="n">connect_module</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">connect_method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Disable integration with DB API library.</span>
+<span class="sd">        https://www.python.org/dev/peps/pep-0249/</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            connect_module: Module name where the connect method is available.</span>
+<span class="sd">            connect_method_name: The connect method name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unwrap</span><span class="p">(</span><span class="n">connect_module</span><span class="p">,</span> <span class="n">connect_method_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="instrument_connection"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.instrument_connection">[docs]</a><span class="k">def</span> <span class="nf">instrument_connection</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">connection</span><span class="p">,</span>
+    <span class="n">database_component</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">database_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">connection_attributes</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">tracer_provider</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TracerProvider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enable instrumentation in a database connection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tracer: The :class:`opentelemetry.trace.Tracer` to use.</span>
+<span class="sd">        connection: The connection to instrument.</span>
+<span class="sd">        database_component: Database driver name or database name &quot;JDBI&quot;,</span>
+<span class="sd">            &quot;jdbc&quot;, &quot;odbc&quot;, &quot;postgreSQL&quot;.</span>
+<span class="sd">        database_type: The Database type. For any SQL database, &quot;sql&quot;.</span>
+<span class="sd">        connection_attributes: Attribute names for database, port, host and</span>
+<span class="sd">            user in a connection object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An instrumented connection.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db_integration</span> <span class="o">=</span> <span class="n">DatabaseApiIntegration</span><span class="p">(</span>
+        <span class="n">name</span><span class="p">,</span>
+        <span class="n">database_component</span><span class="p">,</span>
+        <span class="n">database_type</span><span class="p">,</span>
+        <span class="n">connection_attributes</span><span class="o">=</span><span class="n">connection_attributes</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+        <span class="n">tracer_provider</span><span class="o">=</span><span class="n">tracer_provider</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">db_integration</span><span class="o">.</span><span class="n">get_connection_attributes</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_traced_connection_proxy</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">db_integration</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="uninstrument_connection"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.uninstrument_connection">[docs]</a><span class="k">def</span> <span class="nf">uninstrument_connection</span><span class="p">(</span><span class="n">connection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Disable instrumentation in a database connection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        connection: The connection to uninstrument.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An uninstrumented connection.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">wrapt</span><span class="o">.</span><span class="n">ObjectProxy</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">__wrapped__</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Connection is not instrumented&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">connection</span></div>
+
+
+<div class="viewcode-block" id="DatabaseApiIntegration"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.DatabaseApiIntegration">[docs]</a><span class="k">class</span> <span class="nc">DatabaseApiIntegration</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">database_component</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">database_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sql&quot;</span><span class="p">,</span>
+        <span class="n">connection_attributes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">tracer_provider</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TracerProvider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_attributes</span> <span class="o">=</span> <span class="n">connection_attributes</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_attributes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection_attributes</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;database&quot;</span><span class="p">:</span> <span class="s2">&quot;database&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="s2">&quot;port&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version</span> <span class="o">=</span> <span class="n">version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tracer_provider</span> <span class="o">=</span> <span class="n">tracer_provider</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database_component</span> <span class="o">=</span> <span class="n">database_component</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database_type</span> <span class="o">=</span> <span class="n">database_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_props</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">span_attributes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<div class="viewcode-block" id="DatabaseApiIntegration.get_tracer"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.DatabaseApiIntegration.get_tracer">[docs]</a>    <span class="k">def</span> <span class="nf">get_tracer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_tracer</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+            <span class="n">instrumenting_library_version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_version</span><span class="p">,</span>
+            <span class="n">tracer_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_tracer_provider</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="DatabaseApiIntegration.wrapped_connection"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.DatabaseApiIntegration.wrapped_connection">[docs]</a>    <span class="k">def</span> <span class="nf">wrapped_connection</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">connect_method</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">kwargs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add object proxy to connection object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">connect_method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_connection_attributes</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">get_traced_connection_proxy</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DatabaseApiIntegration.get_connection_attributes"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.DatabaseApiIntegration.get_connection_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">get_connection_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
+        <span class="c1"># Populate span fields using connection</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Allow attributes nested in connection object</span>
+            <span class="n">attribute</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">attribute_value</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span>
+                    <span class="n">attribute</span><span class="p">,</span> <span class="n">attribute_value</span><span class="p">,</span> <span class="kc">None</span>
+                <span class="p">),</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">),</span>
+                <span class="n">connection</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">attribute</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connection_props</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database_component</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;database&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">:</span>
+            <span class="c1"># PyMySQL encodes names with utf-8</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">,</span> <span class="s2">&quot;decode&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">span_attributes</span><span class="p">[</span><span class="s2">&quot;db.user&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;host&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">span_attributes</span><span class="p">[</span><span class="s2">&quot;net.peer.name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">span_attributes</span><span class="p">[</span><span class="s2">&quot;net.peer.port&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">port</span></div></div>
+
+
+<div class="viewcode-block" id="get_traced_connection_proxy"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.get_traced_connection_proxy">[docs]</a><span class="k">def</span> <span class="nf">get_traced_connection_proxy</span><span class="p">(</span>
+    <span class="n">connection</span><span class="p">,</span> <span class="n">db_api_integration</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">):</span>
+    <span class="c1"># pylint: disable=abstract-method</span>
+    <span class="k">class</span> <span class="nc">TracedConnectionProxy</span><span class="p">(</span><span class="n">wrapt</span><span class="o">.</span><span class="n">ObjectProxy</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">wrapt</span><span class="o">.</span><span class="n">ObjectProxy</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">get_traced_cursor_proxy</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">db_api_integration</span>
+            <span class="p">)</span>
+
+        <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">TracedConnectionProxy</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TracedCursor"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.TracedCursor">[docs]</a><span class="k">class</span> <span class="nc">TracedCursor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_api_integration</span><span class="p">:</span> <span class="n">DatabaseApiIntegration</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db_api_integration</span> <span class="o">=</span> <span class="n">db_api_integration</span>
+
+    <span class="k">def</span> <span class="nf">_populate_span</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">span</span><span class="p">:</span> <span class="n">trace_api</span><span class="o">.</span><span class="n">Span</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="n">statement</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span>
+            <span class="s2">&quot;component&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_api_integration</span><span class="o">.</span><span class="n">database_component</span>
+        <span class="p">)</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;db.type&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_api_integration</span><span class="o">.</span><span class="n">database_type</span><span class="p">)</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;db.instance&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_api_integration</span><span class="o">.</span><span class="n">database</span><span class="p">)</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;db.statement&quot;</span><span class="p">,</span> <span class="n">statement</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="p">(</span>
+            <span class="n">attribute_key</span><span class="p">,</span>
+            <span class="n">attribute_value</span><span class="p">,</span>
+        <span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_api_integration</span><span class="o">.</span><span class="n">span_attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">,</span> <span class="n">attribute_value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;db.statement.parameters&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="TracedCursor.traced_execution"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.TracedCursor.traced_execution">[docs]</a>    <span class="k">def</span> <span class="nf">traced_execution</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">query_method</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span>
+    <span class="p">):</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_api_integration</span><span class="o">.</span><span class="n">get_tracer</span><span class="p">()</span><span class="o">.</span><span class="n">start_as_current_span</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db_api_integration</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">SpanKind</span><span class="o">.</span><span class="n">CLIENT</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">span</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_populate_span</span><span class="p">(</span><span class="n">span</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">query_method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">span</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">Status</span><span class="p">(</span><span class="n">StatusCanonicalCode</span><span class="o">.</span><span class="n">OK</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">result</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+                <span class="n">span</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">Status</span><span class="p">(</span><span class="n">StatusCanonicalCode</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)))</span>
+                <span class="k">raise</span> <span class="n">ex</span></div></div>
+
+
+<div class="viewcode-block" id="get_traced_cursor_proxy"><a class="viewcode-back" href="../../../instrumentation/dbapi/dbapi.html#opentelemetry.instrumentation.dbapi.get_traced_cursor_proxy">[docs]</a><span class="k">def</span> <span class="nf">get_traced_cursor_proxy</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">db_api_integration</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">_traced_cursor</span> <span class="o">=</span> <span class="n">TracedCursor</span><span class="p">(</span><span class="n">db_api_integration</span><span class="p">)</span>
+
+    <span class="c1"># pylint: disable=abstract-method</span>
+    <span class="k">class</span> <span class="nc">TracedCursorProxy</span><span class="p">(</span><span class="n">wrapt</span><span class="o">.</span><span class="n">ObjectProxy</span><span class="p">):</span>
+
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">wrapt</span><span class="o">.</span><span class="n">ObjectProxy</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_traced_cursor</span><span class="o">.</span><span class="n">traced_execution</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="n">execute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">executemany</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_traced_cursor</span><span class="o">.</span><span class="n">traced_execution</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="n">executemany</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">callproc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_traced_cursor</span><span class="o">.</span><span class="n">traced_execution</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="n">callproc</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped__</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">TracedCursorProxy</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright OpenTelemetry Authors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

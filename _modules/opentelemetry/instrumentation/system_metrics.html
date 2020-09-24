@@ -1,0 +1,949 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.instrumentation.system_metrics &mdash; OpenTelemetry Python  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> OpenTelemetry Python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started.html">Getting Started with OpenTelemetry Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq-and-cookbook.html">Frequently Asked Questions and Cookbook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/api.html">OpenTelemetry Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sdk/sdk.html">OpenTelemetry Python SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Exporters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/datadog/datadog.html">OpenTelemetry Datadog Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/jaeger/jaeger.html">Opentelemetry Jaeger Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/opencensus/opencensus.html">OpenCensus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/otlp/otlp.html">Opentelemetry OTLP Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/prometheus/prometheus.html">OpenTelemetry Prometheus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/zipkin/zipkin.html">Opentelemetry Zipkin Exporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Instrumentations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/aiohttp_client/aiohttp_client.html">OpenTelemetry aiohttp client Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/aiopg/aiopg.html">OpenTelemetry aiopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/asgi/asgi.html">OpenTelemetry ASGI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/asyncpg/asyncpg.html">Opentelemetry asyncpg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/boto/boto.html">OpenTelemetry Boto Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/botocore/botocore.html">OpenTelemetry Botocore Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/celery/celery.html">OpenTelemetry Celery Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/dbapi/dbapi.html">OpenTelemetry Database API Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/django/django.html">OpenTelemetry Django Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/fastapi/fastapi.html">OpenTelemetry FastAPI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/flask/flask.html">OpenTelemetry Flask Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/grpc/grpc.html">OpenTelemetry gRPC Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentor.html">opentelemetry.instrumentation.instrumentor package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/jinja2/jinja2.html">OpenTelemetry Jinja2 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/mysql/mysql.html">OpenTelemetry MySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/opentracing_shim/opentracing_shim.html">OpenTracing Shim for OpenTelemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/psycopg2/psycopg2.html">OpenTelemetry Psycopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymemcache/pymemcache.html">OpenTelemetry pymemcache Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymongo/pymongo.html">OpenTelemetry pymongo Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymysql/pymysql.html">OpenTelemetry PyMySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pyramid/pyramid.html">OpenTelemetry Pyramid Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/redis/redis.html">OpenTelemetry Redis Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/requests/requests.html">OpenTelemetry requests Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/sqlalchemy/sqlalchemy.html">OpenTelemetry SQLAlchemy Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/sqlite3/sqlite3.html">OpenTelemetry SQLite3 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/starlette/starlette.html">OpenTelemetry Starlette Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/system_metrics/system_metrics.html">OpenTelemetry System Metrics Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/wsgi/wsgi.html">OpenTelemetry WSGI Instrumentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/auto-instrumentation/README.html">Autoinstrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/basic_meter/README.html">Basic Meter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/basic_tracer/README.html">Basic Trace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/datadog_exporter/README.html">Datadog Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/django/README.html">OpenTelemetry Django Instrumentation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opencensus-exporter-metrics/README.html">OpenTelemetry Collector Metrics OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opencensus-exporter-tracer/README.html">OpenTelemetry Collector Tracer OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opentelemetry-example-app/README.html">OpenTelemetry Example Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opentracing/README.html">OpenTracing Shim Example</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OpenTelemetry Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>opentelemetry.instrumentation.system_metrics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for opentelemetry.instrumentation.system_metrics</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright The OpenTelemetry Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Instrument to report system (CPU, memory, network) and</span>
+<span class="sd">process (CPU, memory, garbage collection) metrics. By default, the</span>
+<span class="sd">following metrics are configured:</span>
+
+<span class="sd">.. code:: python</span>
+
+<span class="sd">    {</span>
+<span class="sd">        &quot;system.cpu.time&quot;: [&quot;idle&quot;, &quot;user&quot;, &quot;system&quot;, &quot;irq&quot;],</span>
+<span class="sd">        &quot;system.cpu.utilization&quot;: [&quot;idle&quot;, &quot;user&quot;, &quot;system&quot;, &quot;irq&quot;],</span>
+<span class="sd">        &quot;system.memory.usage&quot;: [&quot;used&quot;, &quot;free&quot;, &quot;cached&quot;],</span>
+<span class="sd">        &quot;system.memory.utilization&quot;: [&quot;used&quot;, &quot;free&quot;, &quot;cached&quot;],</span>
+<span class="sd">        &quot;system.swap.usage&quot;: [&quot;used&quot;, &quot;free&quot;],</span>
+<span class="sd">        &quot;system.swap.utilization&quot;: [&quot;used&quot;, &quot;free&quot;],</span>
+<span class="sd">        &quot;system.disk.io&quot;: [&quot;read&quot;, &quot;write&quot;],</span>
+<span class="sd">        &quot;system.disk.operations&quot;: [&quot;read&quot;, &quot;write&quot;],</span>
+<span class="sd">        &quot;system.disk.time&quot;: [&quot;read&quot;, &quot;write&quot;],</span>
+<span class="sd">        &quot;system.disk.merged&quot;: [&quot;read&quot;, &quot;write&quot;],</span>
+<span class="sd">        &quot;system.network.dropped.packets&quot;: [&quot;transmit&quot;, &quot;receive&quot;],</span>
+<span class="sd">        &quot;system.network.packets&quot;: [&quot;transmit&quot;, &quot;receive&quot;],</span>
+<span class="sd">        &quot;system.network.errors&quot;: [&quot;transmit&quot;, &quot;receive&quot;],</span>
+<span class="sd">        &quot;system.network.io&quot;: [&quot;trasmit&quot;, &quot;receive&quot;],</span>
+<span class="sd">        &quot;system.network.connections&quot;: [&quot;family&quot;, &quot;type&quot;],</span>
+<span class="sd">        &quot;runtime.memory&quot;: [&quot;rss&quot;, &quot;vms&quot;],</span>
+<span class="sd">        &quot;runtime.cpu.time&quot;: [&quot;user&quot;, &quot;system&quot;],</span>
+<span class="sd">    }</span>
+
+<span class="sd">Usage</span>
+<span class="sd">-----</span>
+
+<span class="sd">.. code:: python</span>
+
+<span class="sd">    from opentelemetry import metrics</span>
+<span class="sd">    from opentelemetry.instrumentation.system_metrics import SystemMetrics</span>
+<span class="sd">    from opentelemetry.sdk.metrics import MeterProvider,</span>
+<span class="sd">    from opentelemetry.sdk.metrics.export import ConsoleMetricsExporter</span>
+
+<span class="sd">    metrics.set_meter_provider(MeterProvider())</span>
+<span class="sd">    exporter = ConsoleMetricsExporter()</span>
+<span class="sd">    SystemMetrics(exporter)</span>
+
+<span class="sd">    # metrics are collected asynchronously</span>
+<span class="sd">    input(&quot;...&quot;)</span>
+
+<span class="sd">    # to configure custom metrics</span>
+<span class="sd">    configuration = {</span>
+<span class="sd">        &quot;system.memory.usage&quot;: [&quot;used&quot;, &quot;free&quot;, &quot;cached&quot;],</span>
+<span class="sd">        &quot;system.cpu.time&quot;: [&quot;idle&quot;, &quot;user&quot;, &quot;system&quot;, &quot;irq&quot;],</span>
+<span class="sd">        &quot;system.network.io&quot;: [&quot;trasmit&quot;, &quot;receive&quot;],</span>
+<span class="sd">        &quot;runtime.memory&quot;: [&quot;rss&quot;, &quot;vms&quot;],</span>
+<span class="sd">        &quot;runtime.cpu.time&quot;: [&quot;user&quot;, &quot;system&quot;],</span>
+<span class="sd">    }</span>
+<span class="sd">    SystemMetrics(exporter, config=configuration)</span>
+
+<span class="sd">API</span>
+<span class="sd">---</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">platform</span> <span class="kn">import</span> <span class="n">python_implementation</span>
+
+<span class="kn">import</span> <span class="nn">psutil</span>
+
+<span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SumObserver</span><span class="p">,</span>
+    <span class="n">UpDownSumObserver</span><span class="p">,</span>
+    <span class="n">ValueObserver</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics.export</span> <span class="kn">import</span> <span class="n">MetricsExporter</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics.export.controller</span> <span class="kn">import</span> <span class="n">PushController</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.util</span> <span class="kn">import</span> <span class="n">get_dict_as_key</span>
+
+
+<div class="viewcode-block" id="SystemMetrics"><a class="viewcode-back" href="../../../instrumentation/system_metrics/system_metrics.html#opentelemetry.instrumentation.system_metrics.SystemMetrics">[docs]</a><span class="k">class</span> <span class="nc">SystemMetrics</span><span class="p">:</span>
+    <span class="c1"># pylint: disable=too-many-statements</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">exporter</span><span class="p">:</span> <span class="n">MetricsExporter</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_meter</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">PushController</span><span class="p">(</span>
+            <span class="n">meter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="n">exporter</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="n">interval</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_python_implementation</span> <span class="o">=</span> <span class="n">python_implementation</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;system.cpu.time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;idle&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;irq&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.cpu.utilization&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;idle&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;irq&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.memory.usage&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;used&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">,</span> <span class="s2">&quot;cached&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.memory.utilization&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;used&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">,</span> <span class="s2">&quot;cached&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.swap.usage&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;used&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.swap.utilization&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;used&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">],</span>
+                <span class="c1"># system.swap.page.faults: [],</span>
+                <span class="c1"># system.swap.page.operations: [],</span>
+                <span class="s2">&quot;system.disk.io&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.disk.operations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.disk.time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.disk.merged&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">],</span>
+                <span class="c1"># &quot;system.filesystem.usage&quot;: [],</span>
+                <span class="c1"># &quot;system.filesystem.utilization&quot;: [],</span>
+                <span class="s2">&quot;system.network.dropped.packets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;transmit&quot;</span><span class="p">,</span> <span class="s2">&quot;receive&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.network.packets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;transmit&quot;</span><span class="p">,</span> <span class="s2">&quot;receive&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.network.errors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;transmit&quot;</span><span class="p">,</span> <span class="s2">&quot;receive&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.network.io&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;trasmit&quot;</span><span class="p">,</span> <span class="s2">&quot;receive&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;system.network.connections&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;family&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;runtime.memory&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;rss&quot;</span><span class="p">,</span> <span class="s2">&quot;vms&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;runtime.cpu.time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;system&quot;</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">config</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_time_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_utilization_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_memory_usage_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_memory_utilization_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_swap_usage_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_swap_utilization_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># self._system_swap_page_faults = self._labels.copy()</span>
+        <span class="c1"># self._system_swap_page_operations = self._labels.copy()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_io_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_operations_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_time_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_merged_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># self._system_filesystem_usage_labels = self._labels.copy()</span>
+        <span class="c1"># self._system_filesystem_utilization_labels = self._labels.copy()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_dropped_packets_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_packets_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_errors_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_io_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_connections_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_memory_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_cpu_time_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_gc_count_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_cpu_time</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.cpu.time&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System CPU time&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;seconds&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_cpu_utilization</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.cpu.utilization&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System CPU utilization&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">ValueObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_memory_usage</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.memory.usage&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System memory usage&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">ValueObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_memory_utilization</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.memory.utilization&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System memory utilization&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">ValueObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_swap_usage</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.swap.usage&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System swap usage&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;pages&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">ValueObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_swap_utilization</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.swap.utilization&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System swap utilization&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">ValueObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># self.meter.register_observer(</span>
+        <span class="c1">#     callback=self._get_system_swap_page_faults,</span>
+        <span class="c1">#     name=&quot;system.swap.page_faults&quot;,</span>
+        <span class="c1">#     description=&quot;System swap page faults&quot;,</span>
+        <span class="c1">#     unit=&quot;faults&quot;,</span>
+        <span class="c1">#     value_type=int,</span>
+        <span class="c1">#     observer_type=SumObserver,</span>
+        <span class="c1"># )</span>
+
+        <span class="c1"># self.meter.register_observer(</span>
+        <span class="c1">#     callback=self._get_system_swap_page_operations,</span>
+        <span class="c1">#     name=&quot;system.swap.page_operations&quot;,</span>
+        <span class="c1">#     description=&quot;System swap page operations&quot;,</span>
+        <span class="c1">#     unit=&quot;operations&quot;,</span>
+        <span class="c1">#     value_type=int,</span>
+        <span class="c1">#     observer_type=SumObserver,</span>
+        <span class="c1"># )</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_disk_io</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.disk.io&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System disk IO&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_disk_operations</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.disk.operations&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System disk operations&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;operations&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_disk_time</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.disk.time&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System disk time&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;seconds&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_disk_merged</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.disk.merged&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System disk merged&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># self.meter.register_observer(</span>
+        <span class="c1">#     callback=self._get_system_filesystem_usage,</span>
+        <span class="c1">#     name=&quot;system.filesystem.usage&quot;,</span>
+        <span class="c1">#     description=&quot;System filesystem usage&quot;,</span>
+        <span class="c1">#     unit=&quot;bytes&quot;,</span>
+        <span class="c1">#     value_type=int,</span>
+        <span class="c1">#     observer_type=ValueObserver,</span>
+        <span class="c1"># )</span>
+
+        <span class="c1"># self.meter.register_observer(</span>
+        <span class="c1">#     callback=self._get_system_filesystem_utilization,</span>
+        <span class="c1">#     name=&quot;system.filesystem.utilization&quot;,</span>
+        <span class="c1">#     description=&quot;System filesystem utilization&quot;,</span>
+        <span class="c1">#     unit=&quot;1&quot;,</span>
+        <span class="c1">#     value_type=float,</span>
+        <span class="c1">#     observer_type=ValueObserver,</span>
+        <span class="c1"># )</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_network_dropped_packets</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.network.dropped_packets&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System network dropped_packets&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;packets&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_network_packets</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.network.packets&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System network packets&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;packets&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_network_errors</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.network.errors&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System network errors&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;errors&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_network_io</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.network.io&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System network io&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_system_network_connections</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;system.network.connections&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System network connections&quot;</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;connections&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">UpDownSumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_runtime_memory</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;runtime.</span><span class="si">{}</span><span class="s2">.memory&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_python_implementation</span><span class="p">),</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Runtime </span><span class="si">{}</span><span class="s2"> memory&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_python_implementation</span>
+            <span class="p">),</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_runtime_cpu_time</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;runtime.</span><span class="si">{}</span><span class="s2">.cpu_time&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_python_implementation</span><span class="p">),</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Runtime </span><span class="si">{}</span><span class="s2"> CPU time&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_python_implementation</span>
+            <span class="p">),</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;seconds&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">register_observer</span><span class="p">(</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_runtime_gc_count</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;runtime.</span><span class="si">{}</span><span class="s2">.gc_count&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_python_implementation</span><span class="p">),</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Runtime </span><span class="si">{}</span><span class="s2"> GC count&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_python_implementation</span>
+            <span class="p">),</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+            <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">observer_type</span><span class="o">=</span><span class="n">SumObserver</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_cpu_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ValueObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for system CPU time</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">times</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">(</span><span class="n">percpu</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.cpu.time&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_time_labels</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_time_labels</span><span class="p">[</span><span class="s2">&quot;cpu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpu</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">metric</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_time_labels</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_cpu_utilization</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ValueObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for system CPU utilization</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">times_percent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+            <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times_percent</span><span class="p">(</span><span class="n">percpu</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.cpu.utilization&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_utilization_labels</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_utilization_labels</span><span class="p">[</span><span class="s2">&quot;cpu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpu</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">times_percent</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_cpu_utilization_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_memory_usage</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ValueObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for memory usage</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">virtual_memory</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.memory.usage&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_system_memory_usage_labels</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">virtual_memory</span><span class="p">,</span> <span class="n">metric</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_memory_usage_labels</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_memory_utilization</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ValueObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for memory utilization</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">system_memory</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.memory.utilization&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_system_memory_utilization_labels</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">system_memory</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <span class="o">/</span> <span class="n">system_memory</span><span class="o">.</span><span class="n">total</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_memory_utilization_labels</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_swap_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ValueObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for swap usage</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">system_swap</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">swap_memory</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.swap.usage&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_system_swap_usage_labels</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">system_swap</span><span class="p">,</span> <span class="n">metric</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_system_swap_usage_labels</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_swap_utilization</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ValueObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for swap utilization</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">system_swap</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">swap_memory</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.swap.utilization&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_system_swap_utilization_labels</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">system_swap</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <span class="o">/</span> <span class="n">system_swap</span><span class="o">.</span><span class="n">total</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_swap_utilization_labels</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="c1"># TODO Add _get_system_swap_page_faults</span>
+    <span class="c1"># TODO Add _get_system_swap_page_operations</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_disk_io</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for disk IO</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">disk_io_counters</span><span class="p">(</span><span class="n">perdisk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.disk.io&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_io_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_io_labels</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_bytes&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">metric</span><span class="p">)),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_io_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_disk_operations</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for disk operations</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">disk_io_counters</span><span class="p">(</span><span class="n">perdisk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.disk.operations&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_operations_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_operations_labels</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_count&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">metric</span><span class="p">)),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_operations_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_disk_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for disk time</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">disk_io_counters</span><span class="p">(</span><span class="n">perdisk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.disk.time&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_time_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_time_labels</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_time&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">metric</span><span class="p">))</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_time_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_disk_merged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for disk merged operations</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># FIXME The units in the spec is 1, it seems like it should be</span>
+        <span class="c1"># operations or the value type should be Double</span>
+
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">disk_io_counters</span><span class="p">(</span><span class="n">perdisk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.disk.time&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_merged_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_merged_labels</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_merged_count&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">metric</span><span class="p">)),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_disk_merged_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="c1"># TODO Add _get_system_filesystem_usage</span>
+    <span class="c1"># TODO Add _get_system_filesystem_utilization</span>
+    <span class="c1"># TODO Filesystem information can be obtained with os.statvfs in Unix-like</span>
+    <span class="c1"># OSs, how to do the same in Windows?</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_network_dropped_packets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for network dropped packets</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">net_io_counters</span><span class="p">(</span><span class="n">pernic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.network.dropped.packets&quot;</span><span class="p">]:</span>
+                <span class="n">in_out</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;receive&quot;</span><span class="p">:</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;transmit&quot;</span><span class="p">:</span> <span class="s2">&quot;out&quot;</span><span class="p">}[</span><span class="n">metric</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_dropped_packets_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_dropped_packets_labels</span><span class="p">[</span>
+                    <span class="s2">&quot;direction&quot;</span>
+                <span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;drop</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">in_out</span><span class="p">)),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_dropped_packets_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_network_packets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for network packets</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">net_io_counters</span><span class="p">(</span><span class="n">pernic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.network.dropped.packets&quot;</span><span class="p">]:</span>
+                <span class="n">recv_sent</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;receive&quot;</span><span class="p">:</span> <span class="s2">&quot;recv&quot;</span><span class="p">,</span> <span class="s2">&quot;transmit&quot;</span><span class="p">:</span> <span class="s2">&quot;sent&quot;</span><span class="p">}[</span><span class="n">metric</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_packets_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_packets_labels</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;packets_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">recv_sent</span><span class="p">)),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_packets_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_network_errors</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for network errors</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">net_io_counters</span><span class="p">(</span><span class="n">pernic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.network.errors&quot;</span><span class="p">]:</span>
+                <span class="n">in_out</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;receive&quot;</span><span class="p">:</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;transmit&quot;</span><span class="p">:</span> <span class="s2">&quot;out&quot;</span><span class="p">}[</span><span class="n">metric</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_errors_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_errors_labels</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;err</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">in_out</span><span class="p">)),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_errors_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_network_io</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for network IO</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">device</span><span class="p">,</span> <span class="n">counters</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">net_io_counters</span><span class="p">(</span><span class="n">pernic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.network.dropped.packets&quot;</span><span class="p">]:</span>
+                <span class="n">recv_sent</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;receive&quot;</span><span class="p">:</span> <span class="s2">&quot;recv&quot;</span><span class="p">,</span> <span class="s2">&quot;transmit&quot;</span><span class="p">:</span> <span class="s2">&quot;sent&quot;</span><span class="p">}[</span><span class="n">metric</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_io_labels</span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_io_labels</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+                <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">counters</span><span class="p">,</span> <span class="s2">&quot;bytes_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">recv_sent</span><span class="p">)),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_io_labels</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_system_network_connections</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">UpDownSumObserver</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for network connections</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO How to find the device identifier for a particular</span>
+        <span class="c1"># connection?</span>
+
+        <span class="n">connection_counters</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">net_connection</span> <span class="ow">in</span> <span class="n">psutil</span><span class="o">.</span><span class="n">net_connections</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;system.network.connections&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_connections_labels</span><span class="p">[</span><span class="s2">&quot;protocol&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
+                    <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;udp&quot;</span><span class="p">,</span>
+                <span class="p">}[</span><span class="n">net_connection</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_connections_labels</span><span class="p">[</span>
+                    <span class="s2">&quot;state&quot;</span>
+                <span class="p">]</span> <span class="o">=</span> <span class="n">net_connection</span><span class="o">.</span><span class="n">status</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_connections_labels</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+                    <span class="n">net_connection</span><span class="p">,</span> <span class="n">metric</span>
+                <span class="p">)</span>
+
+            <span class="n">connection_counters_key</span> <span class="o">=</span> <span class="n">get_dict_as_key</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_connections_labels</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">connection_counters_key</span> <span class="ow">in</span> <span class="n">connection_counters</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">connection_counters</span><span class="p">[</span><span class="n">connection_counters_key</span><span class="p">][</span><span class="s2">&quot;counter&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">connection_counters</span><span class="p">[</span><span class="n">connection_counters_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;counter&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_system_network_connections_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">connection_counter</span> <span class="ow">in</span> <span class="n">connection_counters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                <span class="n">connection_counter</span><span class="p">[</span><span class="s2">&quot;counter&quot;</span><span class="p">],</span> <span class="n">connection_counter</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_runtime_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for runtime memory</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">proc_memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;runtime.memory&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_memory_labels</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">proc_memory</span><span class="p">,</span> <span class="n">metric</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_memory_labels</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_runtime_cpu_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for runtime CPU time</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">proc_cpu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;runtime.cpu.time&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_cpu_time_labels</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">proc_cpu</span><span class="p">,</span> <span class="n">metric</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_cpu_time_labels</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_runtime_gc_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">metrics</span><span class="o">.</span><span class="n">SumObserver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Observer callback for garbage collection</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observer: the observer to update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">get_count</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_gc_count_labels</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runtime_gc_count_labels</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright OpenTelemetry Authors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

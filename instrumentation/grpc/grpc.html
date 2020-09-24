@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OpenTelemetry gRPC Instrumentation &mdash; OpenTelemetry Python  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OpenTelemetry Jinja2 Instrumentation" href="../jinja2/jinja2.html" />
+    <link rel="prev" title="OpenTelemetry Flask Instrumentation" href="../flask/flask.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> OpenTelemetry Python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started with OpenTelemetry Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-and-cookbook.html">Frequently Asked Questions and Cookbook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">OpenTelemetry Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk/sdk.html">OpenTelemetry Python SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Exporters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../exporter/datadog/datadog.html">OpenTelemetry Datadog Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exporter/jaeger/jaeger.html">Opentelemetry Jaeger Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exporter/opencensus/opencensus.html">OpenCensus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exporter/otlp/otlp.html">Opentelemetry OTLP Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exporter/prometheus/prometheus.html">OpenTelemetry Prometheus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exporter/zipkin/zipkin.html">Opentelemetry Zipkin Exporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Instrumentations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../aiohttp_client/aiohttp_client.html">OpenTelemetry aiohttp client Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aiopg/aiopg.html">OpenTelemetry aiopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../asgi/asgi.html">OpenTelemetry ASGI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../asyncpg/asyncpg.html">Opentelemetry asyncpg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boto/boto.html">OpenTelemetry Boto Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../botocore/botocore.html">OpenTelemetry Botocore Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../celery/celery.html">OpenTelemetry Celery Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dbapi/dbapi.html">OpenTelemetry Database API Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../django/django.html">OpenTelemetry Django Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/fastapi.html">OpenTelemetry FastAPI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flask/flask.html">OpenTelemetry Flask Instrumentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OpenTelemetry gRPC Instrumentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-opentelemetry.instrumentation.grpc">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage-client">Usage Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-server">Usage Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instrumentor.html">opentelemetry.instrumentation.instrumentor package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jinja2/jinja2.html">OpenTelemetry Jinja2 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mysql/mysql.html">OpenTelemetry MySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opentracing_shim/opentracing_shim.html">OpenTracing Shim for OpenTelemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../psycopg2/psycopg2.html">OpenTelemetry Psycopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pymemcache/pymemcache.html">OpenTelemetry pymemcache Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pymongo/pymongo.html">OpenTelemetry pymongo Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pymysql/pymysql.html">OpenTelemetry PyMySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyramid/pyramid.html">OpenTelemetry Pyramid Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../redis/redis.html">OpenTelemetry Redis Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requests/requests.html">OpenTelemetry requests Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sqlalchemy/sqlalchemy.html">OpenTelemetry SQLAlchemy Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sqlite3/sqlite3.html">OpenTelemetry SQLite3 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../starlette/starlette.html">OpenTelemetry Starlette Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_metrics/system_metrics.html">OpenTelemetry System Metrics Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsgi/wsgi.html">OpenTelemetry WSGI Instrumentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/auto-instrumentation/README.html">Autoinstrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/basic_meter/README.html">Basic Meter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/basic_tracer/README.html">Basic Trace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/datadog_exporter/README.html">Datadog Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/django/README.html">OpenTelemetry Django Instrumentation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/opencensus-exporter-metrics/README.html">OpenTelemetry Collector Metrics OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/opencensus-exporter-tracer/README.html">OpenTelemetry Collector Tracer OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/opentelemetry-example-app/README.html">OpenTelemetry Example Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/opentracing/README.html">OpenTracing Shim Example</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OpenTelemetry Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>OpenTelemetry gRPC Instrumentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/instrumentation/grpc/grpc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opentelemetry-grpc-instrumentation">
+<h1>OpenTelemetry gRPC Instrumentation<a class="headerlink" href="#opentelemetry-grpc-instrumentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-opentelemetry.instrumentation.grpc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opentelemetry.instrumentation.grpc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="usage-client">
+<h3>Usage Client<a class="headerlink" href="#usage-client" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">import</span> <span class="nn">grpc</span>
+
+<span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.grpc</span> <span class="kn">import</span> <span class="n">GrpcInstrumentorClient</span><span class="p">,</span> <span class="n">client_interceptor</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace</span> <span class="kn">import</span> <span class="n">TracerProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace.export</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ConsoleSpanExporter</span><span class="p">,</span>
+    <span class="n">SimpleExportSpanProcessor</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics</span> <span class="kn">import</span> <span class="n">MeterProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics.export</span> <span class="kn">import</span> <span class="n">ConsoleMetricsExporter</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.gen</span> <span class="kn">import</span> <span class="n">helloworld_pb2</span><span class="p">,</span> <span class="n">helloworld_pb2_grpc</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gen</span> <span class="kn">import</span> <span class="n">helloworld_pb2</span><span class="p">,</span> <span class="n">helloworld_pb2_grpc</span>
+
+<span class="n">trace</span><span class="o">.</span><span class="n">set_tracer_provider</span><span class="p">(</span><span class="n">TracerProvider</span><span class="p">())</span>
+<span class="n">trace</span><span class="o">.</span><span class="n">get_tracer_provider</span><span class="p">()</span><span class="o">.</span><span class="n">add_span_processor</span><span class="p">(</span>
+    <span class="n">SimpleExportSpanProcessor</span><span class="p">(</span><span class="n">ConsoleSpanExporter</span><span class="p">())</span>
+<span class="p">)</span>
+
+<span class="c1"># Set meter provider to opentelemetry-sdk&#39;s MeterProvider</span>
+<span class="n">metrics</span><span class="o">.</span><span class="n">set_meter_provider</span><span class="p">(</span><span class="n">MeterProvider</span><span class="p">())</span>
+
+<span class="c1"># Optional - export GRPC specific metrics (latency, bytes in/out, errors) by passing an exporter</span>
+<span class="n">instrumentor</span> <span class="o">=</span> <span class="n">GrpcInstrumentorClient</span><span class="p">(</span><span class="n">exporter</span><span class="o">=</span><span class="n">ConsoleMetricsExporter</span><span class="p">(),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">instrumentor</span><span class="o">.</span><span class="n">instrument</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">grpc</span><span class="o">.</span><span class="n">insecure_channel</span><span class="p">(</span><span class="s2">&quot;localhost:50051&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">channel</span><span class="p">:</span>
+
+        <span class="n">stub</span> <span class="o">=</span> <span class="n">helloworld_pb2_grpc</span><span class="o">.</span><span class="n">GreeterStub</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">stub</span><span class="o">.</span><span class="n">SayHello</span><span class="p">(</span><span class="n">helloworld_pb2</span><span class="o">.</span><span class="n">HelloRequest</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;YOU&quot;</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Greeter client received: &quot;</span> <span class="o">+</span> <span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">()</span>
+    <span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage-server">
+<h3>Usage Server<a class="headerlink" href="#usage-server" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">concurrent</span> <span class="kn">import</span> <span class="n">futures</span>
+
+<span class="kn">import</span> <span class="nn">grpc</span>
+
+<span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.grpc</span> <span class="kn">import</span> <span class="n">GrpcInstrumentorServer</span><span class="p">,</span> <span class="n">server_interceptor</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.grpc.grpcext</span> <span class="kn">import</span> <span class="n">intercept_server</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace</span> <span class="kn">import</span> <span class="n">TracerProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace.export</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ConsoleSpanExporter</span><span class="p">,</span>
+    <span class="n">SimpleExportSpanProcessor</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.gen</span> <span class="kn">import</span> <span class="n">helloworld_pb2</span><span class="p">,</span> <span class="n">helloworld_pb2_grpc</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gen</span> <span class="kn">import</span> <span class="n">helloworld_pb2</span><span class="p">,</span> <span class="n">helloworld_pb2_grpc</span>
+
+<span class="n">trace</span><span class="o">.</span><span class="n">set_tracer_provider</span><span class="p">(</span><span class="n">TracerProvider</span><span class="p">())</span>
+<span class="n">trace</span><span class="o">.</span><span class="n">get_tracer_provider</span><span class="p">()</span><span class="o">.</span><span class="n">add_span_processor</span><span class="p">(</span>
+    <span class="n">SimpleExportSpanProcessor</span><span class="p">(</span><span class="n">ConsoleSpanExporter</span><span class="p">())</span>
+<span class="p">)</span>
+<span class="n">grpc_server_instrumentor</span> <span class="o">=</span> <span class="n">GrpcInstrumentorServer</span><span class="p">()</span>
+<span class="n">grpc_server_instrumentor</span><span class="o">.</span><span class="n">instrument</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">helloworld_pb2_grpc</span><span class="o">.</span><span class="n">GreeterServicer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">SayHello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">helloworld_pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Hello, </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">request</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">serve</span><span class="p">():</span>
+
+    <span class="n">server</span> <span class="o">=</span> <span class="n">grpc</span><span class="o">.</span><span class="n">server</span><span class="p">(</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">())</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">intercept_server</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">server_interceptor</span><span class="p">())</span>
+
+    <span class="n">helloworld_pb2_grpc</span><span class="o">.</span><span class="n">add_GreeterServicer_to_server</span><span class="p">(</span><span class="n">Greeter</span><span class="p">(),</span> <span class="n">server</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">add_insecure_port</span><span class="p">(</span><span class="s2">&quot;[::]:50051&quot;</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">wait_for_termination</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">()</span>
+    <span class="n">serve</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="opentelemetry.instrumentation.grpc.GrpcInstrumentorServer">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.instrumentation.grpc.</code><code class="sig-name descname">GrpcInstrumentorServer</code><a class="reference internal" href="../../_modules/opentelemetry/instrumentation/grpc.html#GrpcInstrumentorServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.instrumentation.grpc.GrpcInstrumentorServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../instrumentor.html#opentelemetry.instrumentation.instrumentor.BaseInstrumentor" title="opentelemetry.instrumentation.instrumentor.BaseInstrumentor"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.instrumentation.instrumentor.BaseInstrumentor</span></code></a></p>
+<dl class="method">
+<dt id="opentelemetry.instrumentation.grpc.GrpcInstrumentorServer.wrapper_fn">
+<code class="sig-name descname">wrapper_fn</code><span class="sig-paren">(</span><em class="sig-param">original_func</em>, <em class="sig-param">instance</em>, <em class="sig-param">args</em>, <em class="sig-param">kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opentelemetry/instrumentation/grpc.html#GrpcInstrumentorServer.wrapper_fn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.instrumentation.grpc.GrpcInstrumentorServer.wrapper_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.instrumentation.grpc.GrpcInstrumentorClient">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.instrumentation.grpc.</code><code class="sig-name descname">GrpcInstrumentorClient</code><a class="reference internal" href="../../_modules/opentelemetry/instrumentation/grpc.html#GrpcInstrumentorClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.instrumentation.grpc.GrpcInstrumentorClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../instrumentor.html#opentelemetry.instrumentation.instrumentor.BaseInstrumentor" title="opentelemetry.instrumentation.instrumentor.BaseInstrumentor"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.instrumentation.instrumentor.BaseInstrumentor</span></code></a></p>
+<dl class="method">
+<dt id="opentelemetry.instrumentation.grpc.GrpcInstrumentorClient.wrapper_fn">
+<code class="sig-name descname">wrapper_fn</code><span class="sig-paren">(</span><em class="sig-param">exporter</em>, <em class="sig-param">interval</em>, <em class="sig-param">original_func</em>, <em class="sig-param">instance</em>, <em class="sig-param">args</em>, <em class="sig-param">kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opentelemetry/instrumentation/grpc.html#GrpcInstrumentorClient.wrapper_fn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.instrumentation.grpc.GrpcInstrumentorClient.wrapper_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="opentelemetry.instrumentation.grpc.client_interceptor">
+<code class="sig-prename descclassname">opentelemetry.instrumentation.grpc.</code><code class="sig-name descname">client_interceptor</code><span class="sig-paren">(</span><em class="sig-param">tracer_provider=None</em>, <em class="sig-param">exporter=None</em>, <em class="sig-param">interval=30</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opentelemetry/instrumentation/grpc.html#client_interceptor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.instrumentation.grpc.client_interceptor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a gRPC client channel interceptor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tracer</strong> – The tracer to use to create client-side spans.</p></li>
+<li><p><strong>exporter</strong> – The exporter that will receive client metrics</p></li>
+<li><p><strong>interval</strong> – Time between every export call</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An invocation-side interceptor object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="opentelemetry.instrumentation.grpc.server_interceptor">
+<code class="sig-prename descclassname">opentelemetry.instrumentation.grpc.</code><code class="sig-name descname">server_interceptor</code><span class="sig-paren">(</span><em class="sig-param">tracer_provider=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opentelemetry/instrumentation/grpc.html#server_interceptor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.instrumentation.grpc.server_interceptor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a gRPC server interceptor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tracer</strong> – The tracer to use to create server-side spans.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A service-side interceptor object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../jinja2/jinja2.html" class="btn btn-neutral float-right" title="OpenTelemetry Jinja2 Instrumentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../flask/flask.html" class="btn btn-neutral float-left" title="OpenTelemetry Flask Instrumentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright OpenTelemetry Authors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,576 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.exporter.datadog.exporter &mdash; OpenTelemetry Python  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> OpenTelemetry Python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started.html">Getting Started with OpenTelemetry Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq-and-cookbook.html">Frequently Asked Questions and Cookbook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">OpenTelemetry Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sdk/sdk.html">OpenTelemetry Python SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Exporters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../exporter/datadog/datadog.html">OpenTelemetry Datadog Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../exporter/jaeger/jaeger.html">Opentelemetry Jaeger Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../exporter/opencensus/opencensus.html">OpenCensus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../exporter/otlp/otlp.html">Opentelemetry OTLP Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../exporter/prometheus/prometheus.html">OpenTelemetry Prometheus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../exporter/zipkin/zipkin.html">Opentelemetry Zipkin Exporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Instrumentations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/aiohttp_client/aiohttp_client.html">OpenTelemetry aiohttp client Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/aiopg/aiopg.html">OpenTelemetry aiopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/asgi/asgi.html">OpenTelemetry ASGI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/asyncpg/asyncpg.html">Opentelemetry asyncpg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/boto/boto.html">OpenTelemetry Boto Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/botocore/botocore.html">OpenTelemetry Botocore Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/celery/celery.html">OpenTelemetry Celery Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/dbapi/dbapi.html">OpenTelemetry Database API Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/django/django.html">OpenTelemetry Django Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/fastapi/fastapi.html">OpenTelemetry FastAPI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/flask/flask.html">OpenTelemetry Flask Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/grpc/grpc.html">OpenTelemetry gRPC Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/instrumentor.html">opentelemetry.instrumentation.instrumentor package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/jinja2/jinja2.html">OpenTelemetry Jinja2 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/mysql/mysql.html">OpenTelemetry MySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/opentracing_shim/opentracing_shim.html">OpenTracing Shim for OpenTelemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/psycopg2/psycopg2.html">OpenTelemetry Psycopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/pymemcache/pymemcache.html">OpenTelemetry pymemcache Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/pymongo/pymongo.html">OpenTelemetry pymongo Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/pymysql/pymysql.html">OpenTelemetry PyMySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/pyramid/pyramid.html">OpenTelemetry Pyramid Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/redis/redis.html">OpenTelemetry Redis Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/requests/requests.html">OpenTelemetry requests Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/sqlalchemy/sqlalchemy.html">OpenTelemetry SQLAlchemy Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/sqlite3/sqlite3.html">OpenTelemetry SQLite3 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/starlette/starlette.html">OpenTelemetry Starlette Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/system_metrics/system_metrics.html">OpenTelemetry System Metrics Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../instrumentation/wsgi/wsgi.html">OpenTelemetry WSGI Instrumentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/auto-instrumentation/README.html">Autoinstrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/basic_meter/README.html">Basic Meter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/basic_tracer/README.html">Basic Trace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/datadog_exporter/README.html">Datadog Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/django/README.html">OpenTelemetry Django Instrumentation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/opencensus-exporter-metrics/README.html">OpenTelemetry Collector Metrics OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/opencensus-exporter-tracer/README.html">OpenTelemetry Collector Tracer OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/opentelemetry-example-app/README.html">OpenTelemetry Example Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/opentracing/README.html">OpenTracing Shim Example</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">OpenTelemetry Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>opentelemetry.exporter.datadog.exporter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for opentelemetry.exporter.datadog.exporter</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright The OpenTelemetry Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
+
+<span class="kn">from</span> <span class="nn">ddtrace.ext</span> <span class="kn">import</span> <span class="n">SpanTypes</span> <span class="k">as</span> <span class="n">DatadogSpanTypes</span>
+<span class="kn">from</span> <span class="nn">ddtrace.internal.writer</span> <span class="kn">import</span> <span class="n">AgentWriter</span>
+<span class="kn">from</span> <span class="nn">ddtrace.span</span> <span class="kn">import</span> <span class="n">Span</span> <span class="k">as</span> <span class="n">DatadogSpan</span>
+
+<span class="kn">import</span> <span class="nn">opentelemetry.trace</span> <span class="k">as</span> <span class="nn">trace_api</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace</span> <span class="kn">import</span> <span class="n">sampling</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace.export</span> <span class="kn">import</span> <span class="n">SpanExporter</span><span class="p">,</span> <span class="n">SpanExportResult</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.trace.status</span> <span class="kn">import</span> <span class="n">StatusCanonicalCode</span>
+
+<span class="c1"># pylint:disable=relative-beyond-top-level</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DD_ORIGIN</span><span class="p">,</span>
+    <span class="n">ENV_KEY</span><span class="p">,</span>
+    <span class="n">SAMPLE_RATE_METRIC_KEY</span><span class="p">,</span>
+    <span class="n">SERVICE_NAME_TAG</span><span class="p">,</span>
+    <span class="n">VERSION_KEY</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="n">DEFAULT_AGENT_URL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:8126&quot;</span>
+<span class="n">_INSTRUMENTATION_SPAN_TYPES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.aiohttp-client&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">HTTP</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.asgi&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">WEB</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.dbapi&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">SQL</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.django&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">WEB</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.flask&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">WEB</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.grpc&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">GRPC</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.jinja2&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">TEMPLATE</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.mysql&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">SQL</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.psycopg2&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">SQL</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.pymemcache&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">CACHE</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.pymongo&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">MONGODB</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.pymysql&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">SQL</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.redis&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">REDIS</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.requests&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">HTTP</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.sqlalchemy&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">SQL</span><span class="p">,</span>
+    <span class="s2">&quot;opentelemetry.instrumentation.wsgi&quot;</span><span class="p">:</span> <span class="n">DatadogSpanTypes</span><span class="o">.</span><span class="n">WEB</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="DatadogSpanExporter"><a class="viewcode-back" href="../../../../exporter/datadog/datadog.html#opentelemetry.exporter.datadog.DatadogSpanExporter">[docs]</a><span class="k">class</span> <span class="nc">DatadogSpanExporter</span><span class="p">(</span><span class="n">SpanExporter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Datadog span exporter for OpenTelemetry.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        agent_url: The url of the Datadog Agent or use ``DD_TRACE_AGENT_URL`` environment variable</span>
+<span class="sd">        service: The service name to be used for the application or use ``DD_SERVICE`` environment variable</span>
+<span class="sd">        env: Set the application’s environment or use ``DD_ENV`` environment variable</span>
+<span class="sd">        version: Set the application’s version or use ``DD_VERSION`` environment variable</span>
+<span class="sd">        tags: A list of default tags to be added to every span or use ``DD_TAGS`` environment variable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">agent_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent_url</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">agent_url</span>
+            <span class="k">if</span> <span class="n">agent_url</span>
+            <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DD_TRACE_AGENT_URL&quot;</span><span class="p">,</span> <span class="n">DEFAULT_AGENT_URL</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">service</span> <span class="o">=</span> <span class="n">service</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DD_SERVICE&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">env</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DD_ENV&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DD_VERSION&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">_parse_tags_str</span><span class="p">(</span><span class="n">tags</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DD_TAGS&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agent_writer</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">agent_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agent_writer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">url_parsed</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_url</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">url_parsed</span><span class="o">.</span><span class="n">scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="s2">&quot;https&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_agent_writer</span> <span class="o">=</span> <span class="n">AgentWriter</span><span class="p">(</span>
+                    <span class="n">hostname</span><span class="o">=</span><span class="n">url_parsed</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span>
+                    <span class="n">port</span><span class="o">=</span><span class="n">url_parsed</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
+                    <span class="n">https</span><span class="o">=</span><span class="n">url_parsed</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">url_parsed</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s2">&quot;unix&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_agent_writer</span> <span class="o">=</span> <span class="n">AgentWriter</span><span class="p">(</span><span class="n">uds_path</span><span class="o">=</span><span class="n">url_parsed</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Unknown scheme `</span><span class="si">%s</span><span class="s2">` for agent URL&quot;</span> <span class="o">%</span> <span class="n">url_parsed</span><span class="o">.</span><span class="n">scheme</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agent_writer</span>
+
+<div class="viewcode-block" id="DatadogSpanExporter.export"><a class="viewcode-back" href="../../../../exporter/datadog/datadog.html#opentelemetry.exporter.datadog.DatadogSpanExporter.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spans</span><span class="p">):</span>
+        <span class="n">datadog_spans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate_to_datadog</span><span class="p">(</span><span class="n">spans</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">spans</span><span class="o">=</span><span class="n">datadog_spans</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">SpanExportResult</span><span class="o">.</span><span class="n">SUCCESS</span></div>
+
+<div class="viewcode-block" id="DatadogSpanExporter.shutdown"><a class="viewcode-back" href="../../../../exporter/datadog/datadog.html#opentelemetry.exporter.datadog.DatadogSpanExporter.shutdown">[docs]</a>    <span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_writer</span><span class="o">.</span><span class="n">started</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_writer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_writer</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_writer</span><span class="o">.</span><span class="n">exit_timeout</span><span class="p">)</span></div>
+
+    <span class="c1"># pylint: disable=too-many-locals</span>
+    <span class="k">def</span> <span class="nf">_translate_to_datadog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spans</span><span class="p">):</span>
+        <span class="n">datadog_spans</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="n">spans</span><span class="p">:</span>
+            <span class="n">trace_id</span><span class="p">,</span> <span class="n">parent_id</span><span class="p">,</span> <span class="n">span_id</span> <span class="o">=</span> <span class="n">_get_trace_ids</span><span class="p">(</span><span class="n">span</span><span class="p">)</span>
+
+            <span class="c1"># datadog Span is initialized with a reference to the tracer which is</span>
+            <span class="c1"># used to record the span when it is finished. We can skip ignore this</span>
+            <span class="c1"># because we are not calling the finish method and explictly set the</span>
+            <span class="c1"># duration.</span>
+            <span class="n">tracer</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># extract resource attributes to be used as tags as well as potential service name</span>
+            <span class="p">[</span>
+                <span class="n">resource_tags</span><span class="p">,</span>
+                <span class="n">resource_service_name</span><span class="p">,</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="n">_extract_tags_from_resource</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">resource</span><span class="p">)</span>
+
+            <span class="n">datadog_span</span> <span class="o">=</span> <span class="n">DatadogSpan</span><span class="p">(</span>
+                <span class="n">tracer</span><span class="p">,</span>
+                <span class="n">_get_span_name</span><span class="p">(</span><span class="n">span</span><span class="p">),</span>
+                <span class="n">service</span><span class="o">=</span><span class="n">resource_service_name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">service</span><span class="p">,</span>
+                <span class="n">resource</span><span class="o">=</span><span class="n">_get_resource</span><span class="p">(</span><span class="n">span</span><span class="p">),</span>
+                <span class="n">span_type</span><span class="o">=</span><span class="n">_get_span_type</span><span class="p">(</span><span class="n">span</span><span class="p">),</span>
+                <span class="n">trace_id</span><span class="o">=</span><span class="n">trace_id</span><span class="p">,</span>
+                <span class="n">span_id</span><span class="o">=</span><span class="n">span_id</span><span class="p">,</span>
+                <span class="n">parent_id</span><span class="o">=</span><span class="n">parent_id</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">datadog_span</span><span class="o">.</span><span class="n">start_ns</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">start_time</span>
+            <span class="n">datadog_span</span><span class="o">.</span><span class="n">duration_ns</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">span</span><span class="o">.</span><span class="n">start_time</span>
+
+            <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">canonical_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">StatusCanonicalCode</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+                <span class="n">datadog_span</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+                    <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span> <span class="o">=</span> <span class="n">_get_exc_info</span><span class="p">(</span><span class="n">span</span><span class="p">)</span>
+                    <span class="c1"># no mapping for error.stack since traceback not recorded</span>
+                    <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="s2">&quot;error.msg&quot;</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">)</span>
+                    <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="s2">&quot;error.type&quot;</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">)</span>
+
+            <span class="c1"># combine resource attributes and span attributes, don&#39;t modify existing span attributes</span>
+            <span class="n">combined_span_tags</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">combined_span_tags</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">resource_tags</span><span class="p">)</span>
+            <span class="n">combined_span_tags</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>
+
+            <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_tags</span><span class="p">(</span><span class="n">combined_span_tags</span><span class="p">)</span>
+
+            <span class="c1"># add configured env tag</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="n">ENV_KEY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
+
+            <span class="c1"># add configured application version tag to only root span</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">parent_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="n">VERSION_KEY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+
+            <span class="c1"># add configured global tags</span>
+            <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_tags</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+
+            <span class="c1"># add origin to root span</span>
+            <span class="n">origin</span> <span class="o">=</span> <span class="n">_get_origin</span><span class="p">(</span><span class="n">span</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">origin</span> <span class="ow">and</span> <span class="n">parent_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="n">DD_ORIGIN</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span>
+
+            <span class="n">sampling_rate</span> <span class="o">=</span> <span class="n">_get_sampling_rate</span><span class="p">(</span><span class="n">span</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sampling_rate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">datadog_span</span><span class="o">.</span><span class="n">set_metric</span><span class="p">(</span><span class="n">SAMPLE_RATE_METRIC_KEY</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="p">)</span>
+
+            <span class="c1"># span events and span links are not supported</span>
+
+            <span class="n">datadog_spans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datadog_span</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">datadog_spans</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_trace_ids</span><span class="p">(</span><span class="n">span</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract tracer ids from span&quot;&quot;&quot;</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span>
+    <span class="n">trace_id</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">trace_id</span>
+    <span class="n">span_id</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">span_id</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">trace_api</span><span class="o">.</span><span class="n">Span</span><span class="p">):</span>
+        <span class="n">parent_id</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">span_id</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">trace_api</span><span class="o">.</span><span class="n">SpanContext</span><span class="p">):</span>
+        <span class="n">parent_id</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">span_id</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">parent_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">trace_id</span> <span class="o">=</span> <span class="n">_convert_trace_id_uint64</span><span class="p">(</span><span class="n">trace_id</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">trace_id</span><span class="p">,</span> <span class="n">parent_id</span><span class="p">,</span> <span class="n">span_id</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_trace_id_uint64</span><span class="p">(</span><span class="n">otel_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert 128-bit int used for trace_id to 64-bit unsigned int&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">otel_id</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFFFFFFFFFF</span>
+
+
+<span class="k">def</span> <span class="nf">_get_span_name</span><span class="p">(</span><span class="n">span</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get span name by using instrumentation and kind while backing off to</span>
+<span class="sd">    span.name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">instrumentation_name</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">instrumentation_info</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">instrumentation_info</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+    <span class="n">span_kind_name</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">kind</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">kind</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instrumentation_name</span><span class="p">,</span> <span class="n">span_kind_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">instrumentation_name</span> <span class="ow">and</span> <span class="n">span_kind_name</span>
+        <span class="k">else</span> <span class="n">span</span><span class="o">.</span><span class="n">name</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span>
+
+
+<span class="k">def</span> <span class="nf">_get_resource</span><span class="p">(</span><span class="n">span</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get resource name for span&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;http.method&quot;</span> <span class="ow">in</span> <span class="n">span</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>
+        <span class="n">route</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http.route&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">span</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;http.method&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">route</span>
+            <span class="k">if</span> <span class="n">route</span>
+            <span class="k">else</span> <span class="n">span</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;http.method&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">span</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">def</span> <span class="nf">_get_span_type</span><span class="p">(</span><span class="n">span</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get Datadog span type&quot;&quot;&quot;</span>
+    <span class="n">instrumentation_name</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">instrumentation_info</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">instrumentation_info</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+    <span class="n">span_type</span> <span class="o">=</span> <span class="n">_INSTRUMENTATION_SPAN_TYPES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instrumentation_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">span_type</span>
+
+
+<span class="k">def</span> <span class="nf">_get_exc_info</span><span class="p">(</span><span class="n">span</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse span status description for exception type and value&quot;&quot;&quot;</span>
+    <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_get_origin</span><span class="p">(</span><span class="n">span</span><span class="p">):</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span>
+    <span class="n">origin</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">trace_state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DD_ORIGIN</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">origin</span>
+
+
+<span class="k">def</span> <span class="nf">_get_sampling_rate</span><span class="p">(</span><span class="n">span</span><span class="p">):</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">rate</span>
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">trace_flags</span><span class="o">.</span><span class="n">sampled</span>
+        <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">sampler</span><span class="p">,</span> <span class="n">sampling</span><span class="o">.</span><span class="n">TraceIdRatioBased</span><span class="p">)</span>
+        <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_tags_str</span><span class="p">(</span><span class="n">tags_str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse a string of tags typically provided via environment variables.</span>
+
+<span class="sd">    The expected string is of the form::</span>
+<span class="sd">        &quot;key1:value1,key2:value2&quot;</span>
+
+<span class="sd">    :param tags_str: A string of the above form to parse tags from.</span>
+<span class="sd">    :return: A dict containing the tags that were parsed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parsed_tags</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tags_str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">parsed_tags</span>
+
+    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">tag</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Validate the tag</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">value</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s2">&quot;Malformed tag in tag pair &#39;</span><span class="si">%s</span><span class="s2">&#39; from tag string &#39;</span><span class="si">%s</span><span class="s2">&#39;.&quot;</span><span class="p">,</span>
+                <span class="n">tag</span><span class="p">,</span>
+                <span class="n">tags_str</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">parsed_tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">parsed_tags</span>
+
+
+<span class="k">def</span> <span class="nf">_extract_tags_from_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse tags from resource.attributes, except service.name which</span>
+<span class="sd">    has special significance within datadog&quot;&quot;&quot;</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">service_name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">resource</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="s2">&quot;attributes&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">tags</span><span class="p">,</span> <span class="n">service_name</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">attribute_key</span><span class="p">,</span> <span class="n">attribute_value</span> <span class="ow">in</span> <span class="n">resource</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">attribute_key</span> <span class="o">==</span> <span class="n">SERVICE_NAME_TAG</span><span class="p">:</span>
+            <span class="n">service_name</span> <span class="o">=</span> <span class="n">attribute_value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tags</span><span class="p">[</span><span class="n">attribute_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_value</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">tags</span><span class="p">,</span> <span class="n">service_name</span><span class="p">]</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright OpenTelemetry Authors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

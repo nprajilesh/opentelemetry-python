@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.instrumentation.pymemcache &mdash; OpenTelemetry Python  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> OpenTelemetry Python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started.html">Getting Started with OpenTelemetry Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq-and-cookbook.html">Frequently Asked Questions and Cookbook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/api.html">OpenTelemetry Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sdk/sdk.html">OpenTelemetry Python SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Exporters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/datadog/datadog.html">OpenTelemetry Datadog Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/jaeger/jaeger.html">Opentelemetry Jaeger Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/opencensus/opencensus.html">OpenCensus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/otlp/otlp.html">Opentelemetry OTLP Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/prometheus/prometheus.html">OpenTelemetry Prometheus Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exporter/zipkin/zipkin.html">Opentelemetry Zipkin Exporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Instrumentations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/aiohttp_client/aiohttp_client.html">OpenTelemetry aiohttp client Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/aiopg/aiopg.html">OpenTelemetry aiopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/asgi/asgi.html">OpenTelemetry ASGI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/asyncpg/asyncpg.html">Opentelemetry asyncpg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/boto/boto.html">OpenTelemetry Boto Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/botocore/botocore.html">OpenTelemetry Botocore Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/celery/celery.html">OpenTelemetry Celery Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/dbapi/dbapi.html">OpenTelemetry Database API Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/django/django.html">OpenTelemetry Django Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/fastapi/fastapi.html">OpenTelemetry FastAPI Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/flask/flask.html">OpenTelemetry Flask Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/grpc/grpc.html">OpenTelemetry gRPC Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentation.html">OpenTelemetry Python Instrumentor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/instrumentor.html">opentelemetry.instrumentation.instrumentor package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/jinja2/jinja2.html">OpenTelemetry Jinja2 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/mysql/mysql.html">OpenTelemetry MySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/opentracing_shim/opentracing_shim.html">OpenTracing Shim for OpenTelemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/psycopg2/psycopg2.html">OpenTelemetry Psycopg Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymemcache/pymemcache.html">OpenTelemetry pymemcache Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymongo/pymongo.html">OpenTelemetry pymongo Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pymysql/pymysql.html">OpenTelemetry PyMySQL Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/pyramid/pyramid.html">OpenTelemetry Pyramid Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/redis/redis.html">OpenTelemetry Redis Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/requests/requests.html">OpenTelemetry requests Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/sqlalchemy/sqlalchemy.html">OpenTelemetry SQLAlchemy Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/sqlite3/sqlite3.html">OpenTelemetry SQLite3 Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/starlette/starlette.html">OpenTelemetry Starlette Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/system_metrics/system_metrics.html">OpenTelemetry System Metrics Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instrumentation/wsgi/wsgi.html">OpenTelemetry WSGI Instrumentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/auto-instrumentation/README.html">Autoinstrumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/basic_meter/README.html">Basic Meter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/basic_tracer/README.html">Basic Trace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/datadog_exporter/README.html">Datadog Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/django/README.html">OpenTelemetry Django Instrumentation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opencensus-exporter-metrics/README.html">OpenTelemetry Collector Metrics OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opencensus-exporter-tracer/README.html">OpenTelemetry Collector Tracer OpenCensus Exporter Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opentelemetry-example-app/README.html">OpenTelemetry Example Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/opentracing/README.html">OpenTracing Shim Example</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OpenTelemetry Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>opentelemetry.instrumentation.pymemcache</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for opentelemetry.instrumentation.pymemcache</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright The OpenTelemetry Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Usage</span>
+<span class="sd">-----</span>
+
+<span class="sd">The OpenTelemetry ``pymemcache`` integration traces pymemcache client operations</span>
+
+<span class="sd">Usage</span>
+<span class="sd">-----</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    from opentelemetry import trace</span>
+<span class="sd">    from opentelemetry.sdk.trace import TracerProvider</span>
+<span class="sd">    from opentelemetry.instrumentation.pymemcache import PymemcacheInstrumentor</span>
+<span class="sd">    trace.set_tracer_provider(TracerProvider())</span>
+<span class="sd">    PymemcacheInstrumentor().instrument()</span>
+<span class="sd">    from pymemcache.client.base import Client</span>
+<span class="sd">    client = Client((&#39;localhost&#39;, 11211))</span>
+<span class="sd">    client.set(&#39;some_key&#39;, &#39;some_value&#39;)</span>
+
+<span class="sd">API</span>
+<span class="sd">---</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># pylint: disable=no-value-for-parameter</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">import</span> <span class="nn">pymemcache</span>
+<span class="kn">from</span> <span class="nn">wrapt</span> <span class="kn">import</span> <span class="n">ObjectProxy</span>
+<span class="kn">from</span> <span class="nn">wrapt</span> <span class="kn">import</span> <span class="n">wrap_function_wrapper</span> <span class="k">as</span> <span class="n">_wrap</span>
+
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.instrumentor</span> <span class="kn">import</span> <span class="n">BaseInstrumentor</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.pymemcache.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.utils</span> <span class="kn">import</span> <span class="n">unwrap</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.trace</span> <span class="kn">import</span> <span class="n">SpanKind</span><span class="p">,</span> <span class="n">get_tracer</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Network attribute semantic convention here:</span>
+<span class="c1"># https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/span-general.md#general-network-connection-attributes</span>
+<span class="n">_HOST</span> <span class="o">=</span> <span class="s2">&quot;net.peer.name&quot;</span>
+<span class="n">_PORT</span> <span class="o">=</span> <span class="s2">&quot;net.peer.port&quot;</span>
+<span class="c1"># Database semantic conventions here:</span>
+<span class="c1"># https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/database.md</span>
+<span class="n">_DB</span> <span class="o">=</span> <span class="s2">&quot;db.type&quot;</span>
+<span class="n">_URL</span> <span class="o">=</span> <span class="s2">&quot;db.url&quot;</span>
+
+<span class="n">_DEFAULT_SERVICE</span> <span class="o">=</span> <span class="s2">&quot;memcached&quot;</span>
+<span class="n">_RAWCMD</span> <span class="o">=</span> <span class="s2">&quot;db.statement&quot;</span>
+<span class="n">_CMD</span> <span class="o">=</span> <span class="s2">&quot;memcached.command&quot;</span>
+<span class="n">COMMANDS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;set_many&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;replace&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;append&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;prepend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_many&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gets&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gets_many&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;delete&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;delete_many&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;incr&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;decr&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;touch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;stats&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;flush_all&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;quit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;set_multi&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_multi&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_set_connection_attributes</span><span class="p">(</span><span class="n">span</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">_get_address_attributes</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_with_tracer_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper for providing tracer for wrapper functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_with_tracer</span><span class="p">(</span><span class="n">tracer</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># prevent double wrapping</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="s2">&quot;__wrapped__&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">tracer</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">_with_tracer</span>
+
+
+<span class="nd">@_with_tracer_wrapper</span>
+<span class="k">def</span> <span class="nf">_wrap_cmd</span><span class="p">(</span><span class="n">tracer</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">tracer</span><span class="o">.</span><span class="n">start_as_current_span</span><span class="p">(</span>
+        <span class="n">_CMD</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">SpanKind</span><span class="o">.</span><span class="n">INTERNAL</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="p">{}</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">span</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="n">_get_query_string</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">vals</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
+            <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="n">_RAWCMD</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+
+            <span class="n">_set_connection_attributes</span><span class="p">(</span><span class="n">span</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;Failed to set attributes for pymemcache span </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_query_string</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Return the query values given the first argument to a pymemcache command.</span>
+
+<span class="sd">    If there are multiple query values, they are joined together</span>
+<span class="sd">    space-separated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">arg</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">keys</span>
+
+
+<span class="k">def</span> <span class="nf">_get_address_attributes</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Attempt to get host and port from Client instance.&quot;&quot;&quot;</span>
+    <span class="n">address_attributes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">address_attributes</span><span class="p">[</span><span class="n">_DB</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;memcached&quot;</span>
+
+    <span class="c1"># client.base.Client contains server attribute which is either a host/port tuple, or unix socket path string</span>
+    <span class="c1"># https://github.com/pinterest/pymemcache/blob/f02ddf73a28c09256589b8afbb3ee50f1171cac7/pymemcache/client/base.py#L228</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="s2">&quot;server&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">server</span>
+            <span class="n">address_attributes</span><span class="p">[</span><span class="n">_HOST</span><span class="p">]</span> <span class="o">=</span> <span class="n">host</span>
+            <span class="n">address_attributes</span><span class="p">[</span><span class="n">_PORT</span><span class="p">]</span> <span class="o">=</span> <span class="n">port</span>
+            <span class="n">address_attributes</span><span class="p">[</span><span class="n">_URL</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;memcached://</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">address_attributes</span><span class="p">[</span><span class="n">_URL</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;memcached://</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">server</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">address_attributes</span>
+
+
+<div class="viewcode-block" id="PymemcacheInstrumentor"><a class="viewcode-back" href="../../../instrumentation/pymemcache/pymemcache.html#opentelemetry.instrumentation.pymemcache.PymemcacheInstrumentor">[docs]</a><span class="k">class</span> <span class="nc">PymemcacheInstrumentor</span><span class="p">(</span><span class="n">BaseInstrumentor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An instrumentor for pymemcache See `BaseInstrumentor`&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_instrument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">tracer_provider</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tracer_provider&quot;</span><span class="p">)</span>
+        <span class="n">tracer</span> <span class="o">=</span> <span class="n">get_tracer</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">__version__</span><span class="p">,</span> <span class="n">tracer_provider</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">COMMANDS</span><span class="p">:</span>
+            <span class="n">_wrap</span><span class="p">(</span>
+                <span class="s2">&quot;pymemcache.client.base&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Client.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cmd</span><span class="p">),</span>
+                <span class="n">_wrap_cmd</span><span class="p">(</span><span class="n">tracer</span><span class="p">,</span> <span class="n">cmd</span><span class="p">),</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_uninstrument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">COMMANDS</span><span class="p">:</span>
+            <span class="n">unwrap</span><span class="p">(</span><span class="n">pymemcache</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">command</span><span class="p">))</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright OpenTelemetry Authors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
